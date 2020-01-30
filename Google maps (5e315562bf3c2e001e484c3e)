@@ -1,0 +1,102 @@
+{
+    "_id": "5e315562bf3c2e001e484c3e",
+    "updated_at": "2020-01-30T07:43:56.521Z",
+    "created_by_id": "5cc90e82da85b000190693f7",
+    "owner_id": "5cc90e82da85b000190693f7",
+    "name": "Google maps",
+    "page_count": 1,
+    "current_page": 0,
+    "deployed": true,
+    "created_at": "2020-01-29T09:28:42.876Z",
+    "__v": 8,
+    "attributes": {
+        "github_repository_sha": "a847b3c0014085b61622596996fd099559e29db7"
+    },
+    "pages": [
+        {
+            "page_id": "8dc9-9227-ddc4",
+            "title": "Details",
+            "page_index": 1,
+            "component_count": null,
+            "deployed": true,
+            "_id": "5e315562bf3c2e001e484c3f",
+            "components": [
+                {
+                    "type": "HTML",
+                    "name": "HTML",
+                    "category": "media",
+                    "label": "Custom HTML",
+                    "icon": "/scripts/formbuilder/img/paragraph.png",
+                    "component_id": "3b85-85cd-4b12",
+                    "attributes": {
+                        "html_detail": "",
+                        "html_edit": "<div class=\"pac-card\" id=\"pac-card\">\n    <div>\n        <div id=\"label\">Location search</div>\n    </div>\n    <div id=\"pac-container\">\n        <input class=\"form-control\" id=\"pac-input\" type=\"text\" placeholder=\"Enter a location\">\n        <div id=\"location-error\"></div>\n    </div>\n</div>\n<div id=\"map\" style=\"height: 400px;\n    overflow: hidden;\n    width: 100%;\n    margin-top: 50px;\"></div>\n<div id=\"infowindow-content\">\n    <img src=\"\" width=\"16\" height=\"16\" id=\"place-icon\"> <span\n        id=\"place-name\" class=\"title\"></span><br> <span\n        id=\"place-address\"></span>\n</div>"
+                    },
+                    "required": false,
+                    "_id": "5e3273aa67b5740014437fe6",
+                    "components": [],
+                    "repeat_value": [],
+                    "controlling_elements": []
+                },
+                {
+                    "type": "JavaScript",
+                    "name": "JavaScript",
+                    "category": "media",
+                    "label": "initMap",
+                    "version": "2",
+                    "component_id": "62b0-d185-d55a",
+                    "attributes": {
+                        "script_detail": "",
+                        "script": "function initMap() {\n\t\tvar centerCoordinates = new google.maps.LatLng(37.6, -95.665);\n\t\tvar map = new google.maps.Map(document.getElementById('map'), {\n\t\t\tcenter : centerCoordinates,\n\t\t\tzoom : 4\n\t\t});\n\t\tvar card = document.getElementById('pac-card');\n\t\tvar input = document.getElementById('pac-input');\n\t\tvar infowindowContent = document.getElementById('infowindow-content');\n\n\t\tmap.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);\n\n\t\tvar autocomplete = new google.maps.places.Autocomplete(input);\n\t\tvar infowindow = new google.maps.InfoWindow();\n\t\tinfowindow.setContent(infowindowContent);\n\n\t\tvar marker = new google.maps.Marker({\n\t\t\tmap : map\n\t\t});\n\n\t\tautocomplete.addListener('place_changed',function() {\n\t\t\tdocument.getElementById(\"location-error\").style.display = 'none';\n\t\t\tinfowindow.close();\n\t\t\tmarker.setVisible(false);\n\t\t\tvar place = autocomplete.getPlace();\n\t\t\tif (!place.geometry) {\n\t\t\t\tdocument.getElementById(\"location-error\").style.display = 'inline-block';\n\t\t\t\tdocument.getElementById(\"location-error\").innerHTML = \"Cannot Locate '\" + input.value + \"' on map\";\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tmap.fitBounds(place.geometry.viewport);\n\t\t\tmarker.setPosition(place.geometry.location);\n\t\t\tmarker.setVisible(true);\n\n\t\t\tinfowindowContent.children['place-icon'].src = place.icon;\n\t\t\tinfowindowContent.children['place-name'].textContent = place.name;\n\t\t\tinfowindowContent.children['place-address'].textContent = input.value;\n\t\t\tinfowindow.open(map, marker);\n\t\t});\n\t}"
+                    },
+                    "required": false,
+                    "_id": "5e3273aa67b5740014437fe5",
+                    "components": [],
+                    "repeat_value": [],
+                    "controlling_elements": []
+                },
+                {
+                    "type": "JavaScript",
+                    "name": "JavaScript",
+                    "category": "media",
+                    "label": "Custom JavaScript",
+                    "version": "2",
+                    "component_id": "ce9c-779b-17b2",
+                    "attributes": {
+                        "script_detail": "",
+                        "script": "$(document).ready(function() {\n    var script = document.createElement('script');\n    script.type = 'text/javascript';\n    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCXMpUMMrjVgbWeWF99SfuFQhe06-ST62s&v=3.exp&libraries=places';\n    document.body.appendChild(script);\n});\n\n\nsetTimeout(function() {\ninitMap();\n}, 2000);"
+                    },
+                    "required": false,
+                    "_id": "5e317c3a742401001e418776",
+                    "components": [],
+                    "repeat_value": [],
+                    "controlling_elements": []
+                },
+                {
+                    "type": "Email",
+                    "name": "Email",
+                    "category": "input",
+                    "label": "Email Field",
+                    "icon": "/scripts/formbuilder/img/email.png",
+                    "component_id": "1bdd-db18-f256",
+                    "required": false,
+                    "_id": "5e32893cd90a4b001907866d",
+                    "components": [],
+                    "repeat_value": [],
+                    "controlling_elements": []
+                }
+            ]
+        }
+    ],
+    "connections": [],
+    "created_by": {
+        "last_name": "H",
+        "first_name": "Shanu",
+        "id": "5cc90e82da85b000190693f7"
+    },
+    "access": "Private",
+    "public": false,
+    "list_view_fields": [],
+    "archived": false,
+    "id": "5e315562bf3c2e001e484c3e"
+}
